@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Head from "next/head";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -173,6 +174,7 @@ export default function Index() {
 
   return (
     <div className={styles.container}>
+      <Head><title>Dashboard | BayaniHub Admin</title></Head>
       <Header />
       <main className={styles.main}>
         <section className={styles.welcomeSection}>

@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Header from "@/components/Header";
@@ -217,10 +218,10 @@ export default function Volunteers() {
 
   return (
     <div className={styles.container}>
+      <Head><title>Volunteers | BayaniHub Admin</title></Head>
       <Header />
 
       <main className={styles.main}>
-        {/* Page header */}
         <div className={styles.pageHeader}>
           <Link
             href="/"

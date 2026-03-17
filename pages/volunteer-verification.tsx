@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
+import Head from "next/head";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -174,10 +175,10 @@ export default function VolunteerVerification() {
 
   return (
     <div className={styles.container}>
+      <Head><title>Volunteer Verification | BayaniHub Admin</title></Head>
       <Header />
 
       <main className={styles.mainContent}>
-        {/* Page Header */}
         <div className={styles.pageHeader}>
           <div className={styles.headerContent}>
             <h1 className={styles.pageTitle}>Volunteer Verification</h1>

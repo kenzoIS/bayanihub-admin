@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Head from "next/head";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import styles from "./approval-status.module.css";
@@ -33,6 +34,7 @@ export default function ApprovalStatus() {
 
   return (
     <div className={styles.container}>
+      <Head><title>Application Approved | BayaniHub Admin</title></Head>
       <Header />
 
       <main className={styles.mainContent}>

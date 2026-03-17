@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
+import Head from "next/head";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -117,9 +118,8 @@ export default function Donors() {
 
   return (
     <div className={styles.container}>
+      <Head><title>Donors | BayaniHub Admin</title></Head>
       <Header />
-      
-      {/* Page Header with Icon */}
       <div className={styles.pageHeader}>
         <Link href="/" className={styles.backButton}>
           <svg className={styles.svg16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Head from "next/head";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import styles from "./rejection-status.module.css";
@@ -38,6 +39,7 @@ export default function RejectionStatus() {
 
   return (
     <div className={styles.container}>
+      <Head><title>Application Rejected | BayaniHub Admin</title></Head>
       <Header />
 
       <main className={styles.mainContent}>

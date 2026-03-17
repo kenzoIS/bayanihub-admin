@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Header from "@/components/Header";
@@ -463,9 +464,9 @@ export default function Inventory() {
 
   return (
     <div className={styles.container}>
+      <Head><title>Inventory | BayaniHub Admin</title></Head>
       <Header />
       <main className={styles.main}>
-        {/* Page Header with Icon */}
         <div className={styles.pageHeader}>
           <Link href="/" className={styles.backButton}>
             <svg className={styles.svg16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
