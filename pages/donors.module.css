@@ -1,0 +1,576 @@
+/* Donors Page Styles */
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #FAFAFA;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.main {
+  flex: 1;
+  width: 100%;
+  max-width: 2000px;
+  margin: 0 auto;
+  padding: 3rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .main {
+    padding: 2rem 2.5rem;
+  }
+}
+
+/* Page Header - Following applicant page pattern */
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-direction: column;
+  padding: 1.5rem 1.25rem 0 1.25rem;
+  max-width: 2000px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .pageHeader {
+    flex-direction: row;
+    padding: 2rem 2.5rem 0 2.5rem;
+  }
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  background-color: #5C6ED5;
+  color: white;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  width: fit-content;
+  border: none;
+}
+
+.backButton:hover {
+  background-color: #3E5A99;
+  box-shadow: 0 2px 8px rgba(92, 110, 213, 0.2);
+}
+
+.headerCenter {
+  text-align: center;
+}
+
+.headerTitle {
+  color: #171717;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.headerSubtitle {
+  color: #737373;
+  font-size: 0.875rem;
+}
+
+.headerSpacer {
+  width: fit-content;
+}
+
+/* Add to the Page Header section */
+.headerTitleWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.headerIcon {
+  width: 2rem;
+  height: 2rem;
+  color: #5C6ED5;
+  stroke: #5C6ED5;
+}
+
+/* Filters Section - Card style from applicant page */
+.filtersSection {
+  background-color: white;
+  border: 1px solid #E5E5E5;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.filtersSection:hover {
+  box-shadow: 0 10px 25px -5px rgba(92, 110, 213, 0.1), 0 8px 10px -6px rgba(92, 110, 213, 0.05);
+  border-color: #5C6ED5;
+}
+
+.filtersContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .filtersContent {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+}
+
+@media (min-width: 1024px) {
+  .filtersContent {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+}
+
+.searchContainer {
+  flex: 0 1 auto;
+  min-width: 200px;
+}
+
+@media (min-width: 768px) {
+  .searchContainer {
+    flex: 1 1 300px;
+    min-width: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .searchContainer {
+    flex: 1 1 auto;
+  }
+}
+
+.searchWrapper {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1rem;
+  height: 1rem;
+  color: #737373;
+}
+
+.searchInput {
+  width: 100%;
+  padding-left: 2.5rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border: 1px solid #E5E5E5;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+  box-sizing: border-box;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #5C6ED5;
+  box-shadow: 0 0 0 3px rgba(92, 110, 213, 0.1);
+}
+
+.filterButtons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.filterSelect {
+  padding: 0.5rem 2rem 0.5rem 0.75rem;
+  border: 1px solid #E5E5E5;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  min-width: fit-content;
+  box-sizing: border-box;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23737373' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+}
+
+.filterSelect:focus {
+  outline: none;
+  border-color: #5C6ED5;
+  box-shadow: 0 0 0 3px rgba(92, 110, 213, 0.1);
+}
+
+.actionButtonsGroup {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.actionButton {
+  padding: 0.5rem 1rem;
+  border: 1px solid #E5E5E5;
+  border-radius: 0.5rem;
+  background-color: white;
+  color: #525252;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.actionButton:hover {
+  background-color: #FAFAFA;
+  color: #5C6ED5;
+  border-color: #5C6ED5;
+}
+
+.actionButtonPrimary {
+  padding: 0.5rem 1rem;
+  background-color: #5C6ED5;
+  color: white;
+  border: 1px solid #5C6ED5;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.actionButtonPrimary:hover {
+  background-color: #3E5A99;
+  border-color: #3E5A99;
+  box-shadow: 0 2px 8px rgba(92, 110, 213, 0.2);
+}
+
+.viewToggleGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.viewLabel {
+  color: #4B5563;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.03125em;
+  white-space: nowrap;
+}
+
+.viewButtonActive {
+  display: flex;
+  width: 32px;
+  height: 40px;
+  padding: 10px 8px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: none;
+  background: rgba(92, 110, 213, 0.1);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.viewButtonActive:hover {
+  background: rgba(92, 110, 213, 0.15);
+}
+
+.viewButtonActive svg {
+  fill: #5C6ED5;
+}
+
+.viewButtonInactive {
+  display: flex;
+  width: 32px;
+  height: 40px;
+  padding: 10px 8px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.viewButtonInactive:hover {
+  background: #F9FAFB;
+  color: #5C6ED5;
+}
+
+/* Donors Grid */
+.donorsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 640px) {
+  .donorsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .donorsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Donor Card - Following card pattern from applicant page */
+.donorCard {
+  background-color: white;
+  border: 1px solid #E5E5E5;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  transition: all 0.2s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.donorCard:hover {
+  box-shadow: 0 10px 25px -5px rgba(92, 110, 213, 0.1), 0 8px 10px -6px rgba(92, 110, 213, 0.05);
+  border-color: #5C6ED5;
+}
+
+.donorCardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.donorAvatar {
+  width: 3rem;
+  height: 3rem;
+  background: linear-gradient(to bottom right, rgba(92, 110, 213, 0.1), rgba(62, 90, 153, 0.1));
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bloodTypeBadge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  background-color: rgba(92, 110, 213, 0.1);
+  border-radius: 9999px;
+}
+
+.donorName {
+  color: #171717;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.donorLocation {
+  color: #737373;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.donorApplied {
+  color: #737373;
+  font-size: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.donorCardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid #E5E5E5;
+}
+
+.donorPhone {
+  color: #525252;
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.donorPhone:hover {
+  color: #5C6ED5;
+}
+
+.donorMenuButton {
+  background: none;
+  border: none;
+  color: #737373;
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.donorMenuButton:hover {
+  color: #5C6ED5;
+}
+
+/* No Results */
+.noResults {
+  background-color: white;
+  border: 1px solid #E5E5E5;
+  border-radius: 0.5rem;
+  padding: 3rem;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.noResults:hover {
+  box-shadow: 0 10px 25px -5px rgba(92, 110, 213, 0.1), 0 8px 10px -6px rgba(92, 110, 213, 0.05);
+  border-color: #5C6ED5;
+}
+
+.noResultsText {
+  color: #737373;
+  font-size: 0.875rem;
+}
+
+/* Pagination - Following applicant page pattern */
+.paginationContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.paginationInfo {
+  font-size: 0.875rem;
+  color: #737373;
+}
+
+.paginationControls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.paginationButton {
+  padding: 0.5rem;
+  border: 1px solid #E5E5E5;
+  border-radius: 0.5rem;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #525252;
+}
+
+.paginationButton:hover:not(:disabled) {
+  background-color: #FAFAFA;
+  color: #5C6ED5;
+  border-color: #5C6ED5;
+}
+
+.paginationButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.paginationPages {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.pageNumber {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid #E5E5E5;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #525252;
+}
+
+.pageNumber:hover {
+  background-color: #FAFAFA;
+  color: #5C6ED5;
+  border-color: #5C6ED5;
+}
+
+.pageNumberActive {
+  background-color: #5C6ED5;
+  color: white;
+  border-color: #5C6ED5;
+}
+
+.pageNumberActive:hover {
+  background-color: #3E5A99;
+  color: white;
+  border-color: #3E5A99;
+}
+
+/* SVG Sizing */
+.svg16 {
+  width: 1rem;
+  height: 1rem;
+}
+
+.svg20 {
+  width: 1.25rem;
+  height: 1.25rem;
+}
