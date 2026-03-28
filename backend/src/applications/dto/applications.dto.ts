@@ -1,6 +1,7 @@
 import { IsOptional, IsString, IsEnum } from 'class-validator';
 
 export enum ApplicationStatus {
+  SUBMITTED = 'submitted',
   PENDING = 'pending',
   APPROVED = 'approved',
   REJECTED = 'rejected',

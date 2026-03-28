@@ -22,8 +22,11 @@ export class ApplicationsService {
     if (filters.role_id) {
       query = query.eq('role_id', filters.role_id);
     }
+    // If a specific status is requested use it; otherwise show the active queue (submitted + pending)
     if (filters.status) {
       query = query.eq('status', filters.status);
+    } else {
+      query = query.in('status', ['submitted', 'pending']);
     }
     if (filters.search) {
       query = query.or(
@@ -91,7 +94,7 @@ export class ApplicationsService {
   async review(
     applicationId: string,
     dto: ReviewApplicationDto,
-    reviewerUserId: string,
+    reviewerUserId: string | null,
   ) {
     // Verify application exists
     const { data: application, error: fetchErr } = await this.supabase

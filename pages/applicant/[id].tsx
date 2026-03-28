@@ -40,6 +40,8 @@ export default function ApplicantDetail() {
   const [isSaved, setIsSaved] = useState(false);
   const [applicant, setApplicant] = useState<Applicant | null>(null);
   const [loading, setLoading] = useState(true);
+  const [actionLoading, setActionLoading] = useState(false);
+  const [actionError, setActionError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!id) return;
@@ -135,6 +137,40 @@ export default function ApplicantDetail() {
     setTimeout(() => setIsSaved(false), 2000);
   };
 
+  const handleApprove = async () => {
+    if (!applicant || actionLoading) return;
+    setActionLoading(true);
+    setActionError(null);
+    try {
+      await apiFetch(`/applications/${applicant.id}/review`, {
+        method: 'PATCH',
+        body: JSON.stringify({ status: 'approved' }),
+      });
+      router.push('/approval-status');
+    } catch (err: any) {
+      setActionError(err?.message ?? 'Failed to approve application');
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  const handleReject = async () => {
+    if (!applicant || actionLoading) return;
+    setActionLoading(true);
+    setActionError(null);
+    try {
+      await apiFetch(`/applications/${applicant.id}/review`, {
+        method: 'PATCH',
+        body: JSON.stringify({ status: 'rejected' }),
+      });
+      router.push('/rejection-status');
+    } catch (err: any) {
+      setActionError(err?.message ?? 'Failed to reject application');
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <Header />
@@ -174,17 +210,22 @@ export default function ApplicantDetail() {
               <span className={`${styles.statusBadge} ${styles.statusUnderReview}`}>
                 {applicant.status}
               </span>
+              {actionError && (
+                <span style={{ color: 'red', fontSize: '0.85rem' }}>{actionError}</span>
+              )}
               <button
-                onClick={() => router.push("/approval-status")}
+                onClick={handleApprove}
                 className={styles.approveButton}
+                disabled={actionLoading}
               >
-                Approve
+                {actionLoading ? 'Processing...' : 'Approve'}
               </button>
               <button
-                onClick={() => router.push("/rejection-status")}
+                onClick={handleReject}
                 className={styles.rejectButton}
+                disabled={actionLoading}
               >
-                Reject
+                {actionLoading ? 'Processing...' : 'Reject'}
               </button>
             </div>
           </div>

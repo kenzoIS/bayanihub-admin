@@ -54,6 +54,6 @@ export class ApplicationsController {
     @Body() dto: ReviewApplicationDto,
     @Req() req: any,
   ) {
-    return this.applicationsService.review(id, dto, req.user.id);
+    return this.applicationsService.review(id, dto, req.user?.id ?? null);
   }
 }

@@ -155,6 +155,7 @@ export default function Volunteers() {
   const [currentPage, setCurrentPage] = useState(1);
   const [volunteers, setVolunteers] = useState<VolunteerApp[]>([]);
   const [loading, setLoading] = useState(true);
+  const [actionLoading, setActionLoading] = useState<string | null>(null);
   const itemsPerPage = 4;
 
   useEffect(() => {
@@ -187,6 +188,38 @@ export default function Volunteers() {
     }
     fetchVolunteers();
   }, []);
+
+  const handleApprove = async (id: string) => {
+    if (actionLoading) return;
+    setActionLoading(id);
+    try {
+      await apiFetch(`/applications/${id}/review`, {
+        method: 'PATCH',
+        body: JSON.stringify({ status: 'approved' }),
+      });
+      setVolunteers((prev) => prev.filter((v) => v.id !== id));
+    } catch (err) {
+      console.error('Error approving application:', err);
+    } finally {
+      setActionLoading(null);
+    }
+  };
+
+  const handleReject = async (id: string) => {
+    if (actionLoading) return;
+    setActionLoading(id);
+    try {
+      await apiFetch(`/applications/${id}/review`, {
+        method: 'PATCH',
+        body: JSON.stringify({ status: 'rejected' }),
+      });
+      setVolunteers((prev) => prev.filter((v) => v.id !== id));
+    } catch (err) {
+      console.error('Error rejecting application:', err);
+    } finally {
+      setActionLoading(null);
+    }
+  };
 
   const filteredVolunteers = useMemo(() => {
     if (selectedRole === "All Applications") {
@@ -307,8 +340,8 @@ export default function Volunteers() {
                       router.push(`/applicant/${id}`);
                     }
                   }}
-                  onApprove={() => router.push("/approval-status")}
-                  onReject={() => router.push("/rejection-status")}
+                  onApprove={(id) => handleApprove(id)}
+                  onReject={(id) => handleReject(id)}
                 />
               ))}
             </>

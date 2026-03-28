@@ -100,21 +100,20 @@ export default function VolunteerVerification() {
     async function fetchVolunteers() {
       setLoading(true);
       try {
-        const data = await apiFetch<any[]>("/applications");
+        const data = await apiFetch<any[]>("/applications?status=approved");
 
         const mapped: Volunteer[] = (data ?? []).map((row: any) => {
           const profile = row.user_profiles;
           const name = profile ? `${profile.first_name ?? ""} ${profile.last_name ?? ""}`.trim() : "Unknown";
-          const status = row.status === "approved" ? "verified" : row.status ?? "pending";
           return {
             id: row.id,
             name,
             email: profile?.email ?? "",
-            status,
+            status: "verified",
             joinDate: row.applied_at ? new Date(row.applied_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "",
-            rating: status === "verified" ? 4.5 : 0,
-            hoursLogged: status === "verified" ? "Active volunteer" : status === "pending" ? "Pending verification" : "Not registered as volunteer",
-            backgroundVerified: status === "verified",
+            rating: 4.5,
+            hoursLogged: "Active volunteer",
+            backgroundVerified: true,
             avatar: "👤",
           };
         });
