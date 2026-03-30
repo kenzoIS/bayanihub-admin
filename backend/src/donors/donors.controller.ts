@@ -1,11 +1,15 @@
 import {
   Controller,
   Get,
+  Post,
+  Patch,
+  Delete,
   Param,
   Query,
+  Body,
 } from '@nestjs/common';
 import { DonorsService } from './donors.service';
-import { FilterDonorsDto } from './dto/donors.dto';
+import { FilterDonorsDto, CreateDonationDto, UpdateDonationDto } from './dto/donors.dto';
 
 @Controller('donors')
 export class DonorsController {
@@ -36,5 +40,32 @@ export class DonorsController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.donorsService.findOne(id);
+  }
+
+  /**
+   * POST /donors
+   * Create a new donation record.
+   */
+  @Post()
+  create(@Body() dto: CreateDonationDto) {
+    return this.donorsService.create(dto);
+  }
+
+  /**
+   * PATCH /donors/:id
+   * Update an existing donation record.
+   */
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() dto: UpdateDonationDto) {
+    return this.donorsService.update(id, dto);
+  }
+
+  /**
+   * DELETE /donors/:id
+   * Delete a donation record.
+   */
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.donorsService.remove(id);
   }
 }

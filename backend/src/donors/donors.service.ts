@@ -1,7 +1,7 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { SupabaseClient } from '@supabase/supabase-js';
 import { SUPABASE_CLIENT } from '../supabase';
-import { FilterDonorsDto } from './dto/donors.dto';
+import { FilterDonorsDto, CreateDonationDto, UpdateDonationDto } from './dto/donors.dto';
 
 @Injectable()
 export class DonorsService {
@@ -103,5 +103,60 @@ export class DonorsService {
       total_donors: totalDonors ?? 0,
       total_amount: totalAmount,
     };
+  }
+
+  async create(dto: CreateDonationDto) {
+    const { data, error } = await this.supabase
+      .from('donations')
+      .insert({
+        campaign_id: dto.campaign_id ?? null,
+        donor_auth_id: dto.donor_auth_id ?? null,
+        amount: dto.amount,
+        currency: dto.currency ?? 'PHP',
+        payment_method: dto.payment_method ?? null,
+        transaction_ref: dto.transaction_ref ?? null,
+        hopecard_id: dto.hopecard_id ?? null,
+        message: dto.message ?? null,
+        anonymous: dto.anonymous ?? false,
+        status: dto.status ?? 'pending',
+      })
+      .select()
+      .single();
+
+    if (error) throw error;
+    return data;
+  }
+
+  async update(id: string, dto: UpdateDonationDto) {
+    const updateData: Record<string, any> = {};
+    if (dto.campaign_id !== undefined) updateData.campaign_id = dto.campaign_id;
+    if (dto.amount !== undefined) updateData.amount = dto.amount;
+    if (dto.currency !== undefined) updateData.currency = dto.currency;
+    if (dto.payment_method !== undefined) updateData.payment_method = dto.payment_method;
+    if (dto.transaction_ref !== undefined) updateData.transaction_ref = dto.transaction_ref;
+    if (dto.message !== undefined) updateData.message = dto.message;
+    if (dto.anonymous !== undefined) updateData.anonymous = dto.anonymous;
+    if (dto.status !== undefined) updateData.status = dto.status;
+
+    const { data, error } = await this.supabase
+      .from('donations')
+      .update(updateData)
+      .eq('id', id)
+      .select()
+      .single();
+
+    if (error) throw error;
+    if (!data) throw new NotFoundException('Donation not found');
+    return data;
+  }
+
+  async remove(id: string) {
+    const { error } = await this.supabase
+      .from('donations')
+      .delete()
+      .eq('id', id);
+
+    if (error) throw error;
+    return { deleted: true };
   }
 }

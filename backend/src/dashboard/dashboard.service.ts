@@ -9,7 +9,7 @@ export class DashboardService {
   ) {}
 
   async getStats() {
-    const [donorsRes, volunteersRes, campaignsRes] = await Promise.all([
+    const [donorsRes, volunteersRes, campaignsRes, lastDonorUpdateRes, lastVolunteerUpdateRes, lastInventoryUpdateRes] = await Promise.all([
       this.supabase
         .from('donations')
         .select('*', { count: 'exact', head: true }),
@@ -19,12 +19,32 @@ export class DashboardService {
       this.supabase
         .from('bh_campaigns')
         .select('*', { count: 'exact', head: true }),
+      this.supabase
+        .from('donations')
+        .select('donated_at')
+        .order('donated_at', { ascending: false })
+        .limit(1),
+      this.supabase
+        .from('volunteer_applications')
+        .select('applied_at')
+        .order('applied_at', { ascending: false })
+        .limit(1),
+      this.supabase
+        .from('bh_campaigns')
+        .select('created_at')
+        .order('created_at', { ascending: false })
+        .limit(1),
     ]);
 
     return {
       activeDonors: donorsRes.count ?? 0,
       volunteers: volunteersRes.count ?? 0,
       inventoryItems: campaignsRes.count ?? 0,
+      lastUpdated: {
+        donors: lastDonorUpdateRes.data && lastDonorUpdateRes.data.length > 0 ? lastDonorUpdateRes.data[0].donated_at : null,
+        volunteers: lastVolunteerUpdateRes.data && lastVolunteerUpdateRes.data.length > 0 ? lastVolunteerUpdateRes.data[0].applied_at : null,
+        inventory: lastInventoryUpdateRes.data && lastInventoryUpdateRes.data.length > 0 ? lastInventoryUpdateRes.data[0].created_at : null,
+      }
     };
   }
 
